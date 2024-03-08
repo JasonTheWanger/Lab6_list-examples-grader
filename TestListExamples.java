@@ -3,9 +3,9 @@ import org.junit.*;
 import java.util.Arrays;
 import java.util.List;
 
-class IsMoon implements StringChecker {
+class IsA implements StringChecker {
   public boolean checkString(String s) {
-    return s.equalsIgnoreCase("moon");
+    return s.equalsIgnoreCase("a");
   }
 }
 
@@ -17,5 +17,14 @@ public class TestListExamples {
     List<String> merged = ListExamples.merge(left, right);
     List<String> expected = Arrays.asList("a", "a", "b", "c", "d");
     assertEquals(expected, merged);
+  }
+
+  @Test(timeout = 500)
+  public void testListFilter(){
+    List<String> orig = Arrays.asList("a", "b", "c", "a");
+    StringChecker isA = new IsA();
+    List<String> result = ListExamples.filter(orig, isA);
+    List<String> expected = Arrays.asList("a", "a");
+    assertEquals(expected, result);
   }
 }
